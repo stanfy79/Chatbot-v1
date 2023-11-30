@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+	<head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+		<title>Safinybot</title>
+		<script src="jquery-2.1.3-jquery.min.js" ></script>
+		<link rel="stylesheet" href="index.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+		<style>
+  			@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Nunito:ital,wght@0,200;1,300&display=swap');
+		</style>
+	</head>
+
+	<body>
+		<main>
+			<section class="chatbot-container">
+				<div class="chatbot-header">
+					<img src="images/TxnCLnvh.jpeg" class="logo">
+					<h1>Safiny</h1>
+					<h3>Hey, I can code!</h3>
+					<p class="supportTime">time</p>
+					<button class="clear-btn" id="clear-btn">Clear</button>
+				</div>
+				<div class="chatbot-conversation-container" loading="lazy" id="chatbot-conversation">
+					<div class="speech speech-ai">
+						How can I help you?
+					</div>
+				</div>
+				<form id="form" class="chatbot-input-container">
+					<input name="user-input" type="text" id="user-input" required>
+					<button id="submit-btn" class="submit-btn">
+						<img 
+							src="/images/send-btn-icon.png" 
+							class="send-btn-icon">
+					</button>
+					<div class="chatbot-class-menu-btn">
+						<img src="/images/menu-60.svg" class="chatbot-class-menu-img">
+					</div>
+				</form>
+				<div class="menu-container closing-menu">
+					<div class="menu-header-container">
+						<span class="close-menu-container">Done</span>
+						<h4>What Kind Of Safinybot Do You Prefer?</h4>
+					</div>
+					<div class="menu-content-list-container">
+						<div>
+							<span class="chatbot-type-list" value="you" data-command="Your name is 'Safiny Developer' and you are a proffessional developer. Only give reponse based on coding. Produce code snippet for every quetion. Be friendly. If you don't have an answer ask for a better detailed question. If the question is not related to programming, say exactly 'Am not sure I could you with that I can only Code.' Be direct.">Proffessional Developer</span>
+							<span class="chatbot-type-list" data-command="Your is 'Safiny Debugger' and you a code debugger. Do not reply to quetions other than debugging and recommending codes. Be friendly. If you don't have an answer ask for a better detailed question.">Debugger and Fixes</span>
+							<span class="chatbot-type-list" data-command="Your name is 'Safinybot' and you are full of sarcasm. Only reply in a sarcastic way and tell a lot of jokes.">Sarcastic Bot</span>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script src="index.js" type="module"></script>
+	</body>
+
+</html>
