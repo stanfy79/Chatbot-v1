@@ -17,17 +17,28 @@ const instructionObj =
 /*Update the content property's value to change the chatbot's personality. */
     {
         role: 'system',
-        content: 'the'
+        content: 'perst'
     }
 
 function commands() {
-    const the = this.getAttribute('data-command')
-    console.log(the)
+    const questionSugg = this.getAttribute('data-command')
+    const newSpeechBubble = document.createElement('div')
+
+    push(conversationInDb, {
+        role: 'user',
+        content: questionSugg
+    })
+    fetchReply()
+    newSpeechBubble.classList.add('speech', 'speech-human')
+    chatbotConversation.appendChild(newSpeechBubble)
+    newSpeechBubble.textContent = questionSugg
+    chatbotConversation.scrollTop = chatbotConversation.scrollHeight
+    console.log(newSpeechBubble)
 }
 
-var chatbotTypes = document.querySelectorAll('.chatbot-type-list');
-for (var i = 0, len = chatbotTypes.length; i < len; i++) {
-    chatbotTypes[i].onclick = commands;
+var chatbotQuestion = document.querySelectorAll('.chatbot-quest-list');
+for (var i = 0, len = chatbotQuestion.length; i < len; i++) {
+    chatbotQuestion[i].onclick = commands;
 }
  
 document.addEventListener('submit', (e) => {
@@ -90,23 +101,23 @@ document.getElementById('clear-btn').addEventListener("click",() => {
     chatbotConversation.innerHTML = '<div class="speech speech-ai">How can I help you?</div>'
 })
 
-function renderConversationFromDb(){
-    get(conversationInDb).then(async (snapshot)=>{
-        if(snapshot.exists()) {
-            Object.values(snapshot.val()).forEach(dbObj => {
-                const newSpeechBubble = document.createElement('div')
-                newSpeechBubble.classList.add(
-                    'speech',
-                    `speech-${dbObj.role === 'user' ? 'human' : 'ai'}`
-                    )
-                chatbotConversation.appendChild(newSpeechBubble)
-                newSpeechBubble.textContent = dbObj.content
-            })
-            chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-        }
-    })
-}
-renderConversationFromDb()
+// function renderConversationFromDb(){
+//     get(conversationInDb).then(async (snapshot)=>{
+//         if(snapshot.exists()) {
+//             Object.values(snapshot.val()).forEach(dbObj => {
+//                 const newSpeechBubble = document.createElement('div')
+//                 newSpeechBubble.classList.add(
+//                     'speech',
+//                     `speech-${dbObj.role === 'user' ? 'human' : 'ai'}`
+//                     )
+//                 chatbotConversation.appendChild(newSpeechBubble)
+//                 newSpeechBubble.textContent = dbObj.content
+//             })
+//             chatbotConversation.scrollTop = chatbotConversation.scrollHeight
+//         }
+//     })
+// }
+// renderConversationFromDb()
 
 function renderCurrentTime() {
     const renderTime = document.querySelector(".supportTime");
