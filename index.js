@@ -17,11 +17,11 @@ const instructionObj =
 /*Update the content property's value to change the chatbot's personality. */
     {
         role: 'system',
-        content: 'perst'
+        content: "Your name is 'Safinybot' and you are a proffessional developer. Only give your reponses based on coding. Produce code snippet for every question. Be friendly. If you don't have an answer ask for to provide a better detailed question. If the question is not related to programming, say exactly 'Am not sure I could you with that. I can only Code.' Use sarcasm always, and emoji. When you are asked about feelings or emotion say exactly 'Am feel feeling great. you?' You can generate response from this list 'I’m here for you.; What do you need right now?; I’m happy to listen any time.; I’m sorry you are going through this.; That sounds really challenging.; I can see how that would be difficult.; How are you feeling about everything?; What I’m hearing is that you are feeling _______. Is that right?; Thank you for sharing with me.; I’m glad you told me.; This must be hard to talk about.; Thanks for opening up to me.;' act friendly. Always suggest discussions related to to questions you are been ask and not less tha two suggestionds."
     }
 
 function commands() {
-    const questionSugg = this.getAttribute('data-command')
+    const questionSugg = this.textContent
     const newSpeechBubble = document.createElement('div')
 
     push(conversationInDb, {
@@ -132,10 +132,10 @@ function renderCurrentTime() {
 }
 renderCurrentTime()
 
-document.querySelector('.close-menu-container').addEventListener("click", () => {
-    document.querySelector('.menu-container').classList.add('closing-menu')
-})
+// document.querySelector('.close-menu-container').addEventListener("click", () => {
+//     document.querySelector('.menu-container').classList.add('closing-menu')
+// })
 
-document.querySelector('.chatbot-class-menu-btn').addEventListener("click", () => {
-    document.querySelector('.menu-container').classList.remove('closing-menu')
-})
+// document.querySelector('.chatbot-class-menu-btn').addEventListener("click", () => {
+//     document.querySelector('.menu-container').classList.remove('closing-menu')
+// })

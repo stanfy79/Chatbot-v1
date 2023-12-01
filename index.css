@@ -32,7 +32,7 @@ main {
     border-radius: var(--border-rad-lg);
     display: flex;
     flex-direction: column;
-    padding: 1em;  
+    padding: .8em;  
 }
 
 .chatbot-container > * {
@@ -107,15 +107,16 @@ main {
 /* stop ugly scroll bar on some browsers */
 .chatbot-conversation-container::-webkit-scrollbar {
     width: 7px;
-    background: darkgray;
+    border-radius: 10px;
+    background: #4B4B4B;
 }
 
 .chatbot-conversation-container::-webkit-scrollbar-thumb {
-    background: #0BBBBB;
+    background: #C0C0C0;
     border-radius: 10px;
 }
 .chatbot-conversation-container::-webkit-scrollbar-thumb:hover {
-    background: black;
+    background: #FFFFFF;
 }
 
 
@@ -133,12 +134,13 @@ main {
 }
 
 .speech:first-child {
-    margin-top: 0;
+    margin-top: 1rem;
 }
 
 .speech-ai {
 	background: #131a25;
     border-top-left-radius: 0;
+    max-width: 90%;
     color: #fcf0f5;
     float: left;
     clear: both;
@@ -221,31 +223,35 @@ input[type="text"]:hover ~ .chatbot-class-menu-btn {
 
 .menu-container {
     width: 100%;
+    padding: 20px 0;
+    margin-bottom: 2em;
+    border-bottom: 2px solid #353B3B;
 }
 .menu-content-list-container {
     width: 100%;
-    flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    display: flex;
-}
-.menu-content-list-container > span {
-    max-width: 45%;
-    min-height: 30px;
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 17px;
+    column-gap: 10px;
+  }
+.menu-content-list-container > div {
     background: #353B3B;
-    padding: 6px;
+    width: 100%;
+    min-height: 42px;
     word-wrap: break-word;
-    color: white;
-    border-radius: 5px;
-    margin: 10px;
+    padding: 10px;
     font-weight: 600;
-    font-size: 14px;
+    color: #D7D7D7;
+    border-radius: 5px;
+    font-size: 13px;
     font-family: Arial;
 }
-.closing-menu {
+/*.closing-menu {
     animation: focusInputAnime .2s forwards;
     display: none;
-}
+}*/
 
 
 
@@ -255,5 +261,4 @@ input[type="text"]:hover ~ .chatbot-class-menu-btn {
     content: ".";
     font-size: 140px;
     font-weight: 900;
-    display: inline-block;
 }
