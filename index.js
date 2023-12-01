@@ -82,14 +82,15 @@ async function fetchReply() {
 
 function renderTypewriterText(text) {
     const newSpeechBubble = document.createElement('div')
-    newSpeechBubble.classList.add('speech', 'speech-ai', 'blinking-cursor')
+    newSpeechBubble.classList.add('speech', 'speech-ai', 'ai-typing')
     chatbotConversation.appendChild(newSpeechBubble)
     let i = 0
     const interval = setInterval(() => {
-        newSpeechBubble.textContent += text.slice(i-1, i)
+        
         if (text.length === i) {
             clearInterval(interval)
-            newSpeechBubble.classList.remove('blinking-cursor')
+            newSpeechBubble.classList.remove('ai-typing')
+            newSpeechBubble.textContent += text
         }
         i++
         chatbotConversation.scrollTop = chatbotConversation.scrollHeight

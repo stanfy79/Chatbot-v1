@@ -15,7 +15,7 @@ html, body {
 }
 
 main {    
-    background-color: slategrey;
+    background-color: darkgray;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -27,9 +27,8 @@ main {
 .chatbot-container {
     background-color: black;
     width: 360px;
-    height: 95%;
+    height: 100%;
     position: relative;
-    border-radius: var(--border-rad-lg);
     display: flex;
     flex-direction: column;
     padding: .8em;  
@@ -154,6 +153,21 @@ main {
     clear: both;
 }
 
+.ai-typing::after {
+    content: "...";
+    font-size: 70px;
+    animation: ai-typing-sign .5s infinite alternate;
+}
+
+@keyframes ai-typing-sign {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .chatbot-input-container {
     display: flex;
     bottom: 0;
@@ -182,7 +196,7 @@ input[type="text"] {
 input:focus ~ .submit-btn, input[type="text"]:focus {
     border-color: white;
 }
-input[type="text"]:hover ~ .chatbot-class-menu-btn {
+/*input[type="text"]:hover ~ .chatbot-class-menu-btn {
     animation: focusInputAnime .2s forwards;
 }
 @keyframes focusInputAnime {
@@ -199,7 +213,7 @@ input[type="text"]:hover ~ .chatbot-class-menu-btn {
         opacity: 0;
         display: none;
     }
-}
+}*/
 
 .submit-btn {
     border-left: 0; 
@@ -214,6 +228,7 @@ input[type="text"]:hover ~ .chatbot-class-menu-btn {
 
 .chatbot-class-menu-btn {
     background-color: transparent;
+    display: none;
     padding: 1em;
 }
 .chatbot-class-menu-img {
@@ -245,7 +260,7 @@ input[type="text"]:hover ~ .chatbot-class-menu-btn {
     font-weight: 600;
     color: #D7D7D7;
     border-radius: 5px;
-    font-size: 13px;
+    font-size: 12px;
     font-family: Arial;
 }
 /*.closing-menu {
