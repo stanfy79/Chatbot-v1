@@ -123,13 +123,13 @@ main {
     padding: .8em;
     margin: .7em 0;
     font-size: 90%;
-    font-weight: 600;
-    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-family: 'Figtree', sans-serif;
     line-height: 1.3rem;
     max-width: 80%;
     word-wrap: break-word;
     color: var(--light-text);
-    border-radius: var(--border-rad-lg); 
+    border-radius: 7px; 
 }
 
 .speech:first-child {
@@ -137,8 +137,7 @@ main {
 }
 
 .speech-ai {
-	background: #131a25;
-    border-top-left-radius: 0;
+	background: #1D2020;
     max-width: 90%;
     color: #fcf0f5;
     float: left;
@@ -146,9 +145,9 @@ main {
 }
 
 .speech-human {
-	background: #08DFBE;
+	background: #00FBC9;
+    font-weight: 600;
     color: black;
-    border-top-right-radius: 0; 
     float: right;
     clear: both;
 }
