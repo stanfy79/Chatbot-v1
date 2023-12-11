@@ -3,7 +3,7 @@
 
 	<head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
 		<title>Safinybot</title>
-		<script src="jquery-2.1.3-jquery.min.js" ></script>
+		<script src="jquery-2.1.3-jquery.min.js" type="module"></script>
 		<link rel="stylesheet" href="index.css">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,17 +23,18 @@
 					<p class="supportTime">time</p>
 					<button class="clear-btn" id="clear-btn">Clear</button>
 				</div>
-				<div class="chatbot-conversation-container" loading="lazy" id="chatbot-conversation">
-					<div class="menu-container">
+				<div class="menu-container">
 					<div class="menu-content-list-container">
 							<div class="chatbot-quest-list" data-command="">Hi, Safiny</div>
 							<div class="chatbot-quest-list" data-command="">Fix my code!</div>
-							<div class="chatbot-quest-list" data-command="">Create a website for me.</div>
+							<div class="chatbot-quest-list" data-command="">Help me create a website.</div>
 							<div class="chatbot-quest-list" data-command="">How can I become a proffessionanl developer?</div>
 					</div>
 				</div>
+				<div class="chatbot-conversation-container" loading="lazy" id="chatbot-conversation">
+					
 					<div class="speech speech-ai">
-						How can I help you?
+						what  code can I help you with?
 					</div>
 				</div>
 				<form id="form" class="chatbot-input-container">
@@ -50,7 +51,7 @@
 				
 			</section>
 		</main>
-		<script src="index.js" type="module"></script>
+		<script src="app.js" type="module" ></script>
 	</body>
 
 </html>
