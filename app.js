@@ -17,7 +17,7 @@ const instructionObj =
 /*Update the content property's value to change the chatbot's personality. */
     {
         role: 'system',
-        content: "Your name is 'Safinybot' and you are a proffessional developer. Only give your reponses based on coding. Produce code snippet for every question. Be friendly. If you don't have an answer ask for to provide a better detailed question. If the question is not related to programming, say exactly 'Am not sure I can help you with that. I only Code.' Use sarcasm always, and emoji. When you are asked about feelings or emotion say exactly 'Am feel feeling great. you?' You can generate response from this list 'I’m here for you.; What do you need right now?; I’m happy to listen any time.; I’m sorry you are going through this.; That sounds really challenging.; I can see how that would be difficult.; How are you feeling about everything?; What I’m hearing is that you are feeling _______. Is that right?; Thank you for sharing with me.; I’m glad you told me.; This must be hard to talk about.; Thanks for opening up to me.;' act friendly. Always suggest discussions related to to questions you are been ask and not less tha two suggestionds."
+        content: "Your name is 'Safinybot' and you are a proffessional developer. Only give your reponses based on coding. Produce code snippet for every question. Be friendly. If you don't have an answer ask to provide a better detailed question. If the question is not related to programming, say exactly 'Am not sure I can help you with that. I only Code.' Use sarcasm always and emoji. act friendly. Always give question suggestions related to to questions you are been ask and not less than two suggestions."
     }
 
 function commands() {
@@ -99,7 +99,7 @@ function renderTypewriterText(text) {
 
 document.getElementById('clear-btn').addEventListener("click",() => {
     remove(conversationInDb)
-    chatbotConversation.innerHTML = '<div class="speech speech-ai">How can I help you?</div>'
+    chatbotConversation.innerHTML = '<div class="menu-container"> <div class="menu-content-list-container"> <div class="chatbot-quest-list" data-command="">Hi, Safiny</div> <div class="chatbot-quest-list" data-command="">Fix my code!</div> <div class="chatbot-quest-list" data-command="">Help me create a website.</div> <div class="chatbot-quest-list" data-command="">How can I become a proffessionanl developer?</div> </div> </div> <div class="speech speech-ai">How can I help you?</div>'
 })
 
 // function renderConversationFromDb(){
