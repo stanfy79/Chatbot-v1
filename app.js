@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 import { Configuration, OpenAIApi } from 'openai'
-import { process } from './env'
+import {process} from './env'
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -102,23 +102,23 @@ document.getElementById('clear-btn').addEventListener("click",() => {
     chatbotConversation.innerHTML = '<div class="menu-container"> <div class="menu-content-list-container"> <div class="chatbot-quest-list" data-command="">Hi, Safiny</div> <div class="chatbot-quest-list" data-command="">Fix my code!</div> <div class="chatbot-quest-list" data-command="">Help me create a website.</div> <div class="chatbot-quest-list" data-command="">How can I become a proffessionanl developer?</div> </div> </div> <div class="speech speech-ai">How can I help you?</div>'
 })
 
-// function renderConversationFromDb(){
-//     get(conversationInDb).then(async (snapshot)=>{
-//         if(snapshot.exists()) {
-//             Object.values(snapshot.val()).forEach(dbObj => {
-//                 const newSpeechBubble = document.createElement('div')
-//                 newSpeechBubble.classList.add(
-//                     'speech',
-//                     `speech-${dbObj.role === 'user' ? 'human' : 'ai'}`
-//                     )
-//                 chatbotConversation.appendChild(newSpeechBubble)
-//                 newSpeechBubble.textContent = dbObj.content
-//             })
-//             chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-//         }
-//     })
-// }
-// renderConversationFromDb()
+ function renderConversationFromDb(){
+     get(conversationInDb).then(async (snapshot)=>{
+         if(snapshot.exists()) {
+             Object.values(snapshot.val()).forEach(dbObj => {
+                 const newSpeechBubble = document.createElement('div')
+                 newSpeechBubble.classList.add(
+                     'speech',
+                     `speech-${dbObj.role === 'user' ? 'human' : 'ai'}`
+                     )
+                 chatbotConversation.appendChild(newSpeechBubble)
+                 newSpeechBubble.textContent = dbObj.content
+             })
+             chatbotConversation.scrollTop = chatbotConversation.scrollHeight
+         }
+     })
+ }
+ renderConversationFromDb()
 
 function renderCurrentTime() {
     const renderTime = document.querySelector(".supportTime");
