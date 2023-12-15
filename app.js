@@ -23,9 +23,9 @@ const database = getDatabase(app)
 const conversationInDb = ref(database)
 const chatbotConversation = document.getElementById('chatbot-conversation')
 
-
-const database2 = getFirestore(app);
-const dataRef2 = ref(database2);
+const app2 = initializeApp(appSettings)
+const database2 = getDatabase(app2);
+const dataRef2 = ref(database2, 'sk');
 get(dataRef2).then((snapshot) => {
   if (snapshot.exists()) {
     const data = snapshot.val();
