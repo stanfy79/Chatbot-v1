@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore';
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 import { Configuration, OpenAIApi } from 'openai'
 import {process} from './env'
@@ -7,11 +8,32 @@ const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 })
 const openai = new OpenAIApi(configuration)
-const appSettings = { databaseURL: 'https://safiny-387ba-default-rtdb.firebaseio.com/' }
+const appSettings = {
+    apiKey: "AIzaSyCRV4qSf3B5QKjrMP7zIDmXEAgHv6Fd-RY",
+    authDomain: "safiny-387ba.firebaseapp.com",
+    databaseURL: "https://safiny-387ba-default-rtdb.firebaseio.com",
+    projectId: "safiny-387ba",
+    storageBucket: "safiny-387ba.appspot.com",
+    messagingSenderId: "332325490200",
+    appId: "1:332325490200:web:6af823a10f948fbfcffd6d",
+    measurementId: "G-TZD5H5ZDBL"
+  };
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const conversationInDb = ref(database)
 const chatbotConversation = document.getElementById('chatbot-conversation')
+
+
+const database2 = getFirestore(app);
+const dataRef2 = ref(database2);
+get(dataRef2).then((snapshot) => {
+  if (snapshot.exists()) {
+    const data = snapshot.val();
+    console.log('Retrieved data from the second database:', data);
+  } else {
+    console.log('No data available for the second database');
+  }
+});
 
 const instructionObj = 
 /*Update the content property's value to change the chatbot's personality. */
