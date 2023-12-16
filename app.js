@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore';
+import axios from 'axios';
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 import { Configuration, OpenAIApi } from 'openai'
 import {process} from './env'
@@ -23,24 +24,23 @@ const database = getDatabase(app)
 const conversationInDb = ref(database)
 const chatbotConversation = document.getElementById('chatbot-conversation')
 
-const app2 = initializeApp(appSettings)
-const database2 = getDatabase(app2);
-const dataRef2 = ref(database2, 'sk');
-get(dataRef2).then((snapshot) => {
-  if (snapshot.exists()) {
-    const data = snapshot.val();
-    console.log('Retrieved data from the second database:', data);
-  } else {
-    console.log('No data available for the second database');
-  }
-});
-
 const instructionObj = 
 /*Update the content property's value to change the chatbot's personality. */
     {
         role: 'system',
         content: "Your name is 'Safinybot' and you are a proffessional developer. Only give your reponses based on coding. Produce code snippet for every question. Be friendly. If you don't have an answer ask to provide a better detailed question. If the question is not related to programming, say exactly 'Am not sure I can help you with that. I only Code.' Use sarcasm always and emoji. act friendly. Always give question suggestions related to to questions you are been ask and not less than two suggestions."
     }
+
+// Frontend code with Axios
+axios.get('https://chatbot-v1-server-8ff6ejs9t-safinys-projects.vercel.app')
+  .then(response => {
+    // Handle the data received from the server
+    console.log(response.data);
+  })
+  .catch(error => {
+    // Handle errors
+    console.error('Error fetching data:', error);
+  });
 
 function commands() {
     const questionSugg = this.textContent
