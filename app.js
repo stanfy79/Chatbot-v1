@@ -32,7 +32,7 @@ const instructionObj =
     }
 
 // Frontend code with Axios
-axios.get('https://chatbot-v1-server-8ff6ejs9t-safinys-projects.vercel.app')
+axios.get('http://localhost:3000')
   .then(response => {
     // Handle the data received from the server
     console.log(response.data);
