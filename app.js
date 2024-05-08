@@ -13,7 +13,7 @@ const openai = new OpenAIApi(configuration)
 const appSettings = {
     apiKey: "AIzaSyCRV4qSf3B5QKjrMP7zIDmXEAgHv6Fd-RY",
   authDomain: "safiny-387ba.firebaseapp.com",
-  databaseURL: "https://safiny-387ba-default-rtdb.firebaseio.com",
+  databaseURL: "https://safiny-387ba-default-rtdb.firebaseio.com/-NlkVApa96cmSdvdYJPQ",
   projectId: "safiny-387ba",
   storageBucket: "safiny-387ba.appspot.com",
   messagingSenderId: "332325490200",
