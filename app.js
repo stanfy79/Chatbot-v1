@@ -3,7 +3,8 @@ import { getFirestore } from 'firebase/firestore';
 import axios from 'axios';
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 import { Configuration, OpenAIApi } from 'openai'
-import process from .env
+import {process} from './env'
+
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
