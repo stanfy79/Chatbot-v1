@@ -3,7 +3,8 @@ import { getFirestore } from 'firebase/firestore';
 import axios from 'axios';
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 import { Configuration, OpenAIApi } from 'openai'
-import {process} from './env'
+
+
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -11,13 +12,13 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 const appSettings = {
     apiKey: "AIzaSyCRV4qSf3B5QKjrMP7zIDmXEAgHv6Fd-RY",
-    authDomain: "safiny-387ba.firebaseapp.com",
-    databaseURL: "https://safiny-387ba-default-rtdb.firebaseio.com",
-    projectId: "safiny-387ba",
-    storageBucket: "safiny-387ba.appspot.com",
-    messagingSenderId: "332325490200",
-    appId: "1:332325490200:web:6af823a10f948fbfcffd6d",
-    measurementId: "G-TZD5H5ZDBL"
+  authDomain: "safiny-387ba.firebaseapp.com",
+  databaseURL: "https://safiny-387ba-default-rtdb.firebaseio.com/-NlkVApa96cmSdvdYJPQ",
+  projectId: "safiny-387ba",
+  storageBucket: "safiny-387ba.appspot.com",
+  messagingSenderId: "332325490200",
+  appId: "1:332325490200:web:9a8e4474d335a118cffd6d",
+  measurementId: "G-C19PLYGTFY"
   };
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
