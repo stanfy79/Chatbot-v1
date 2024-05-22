@@ -3,6 +3,7 @@ import { getFirestore } from 'firebase/firestore';
 import axios from 'axios';
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 import { Configuration, OpenAIApi } from 'openai'
+import { process } from './env';
 
 
 
@@ -11,14 +12,14 @@ const configuration = new Configuration({
 })
 const openai = new OpenAIApi(configuration)
 const appSettings = {
-    apiKey: "AIzaSyCRV4qSf3B5QKjrMP7zIDmXEAgHv6Fd-RY",
-  authDomain: "safiny-387ba.firebaseapp.com",
-  databaseURL: "https://safiny-387ba-default-rtdb.firebaseio.com/-NlkVApa96cmSdvdYJPQ",
-  projectId: "safiny-387ba",
-  storageBucket: "safiny-387ba.appspot.com",
-  messagingSenderId: "332325490200",
-  appId: "1:332325490200:web:9a8e4474d335a118cffd6d",
-  measurementId: "G-C19PLYGTFY"
+    apiKey: "AIzaSyDUvqx88wgcMDT7RWktjlYZ62IgA-z0YTk",
+    authDomain: "chatbot-911ad.firebaseapp.com",
+    databaseURL: "https://chatbot-911ad-default-rtdb.firebaseio.com",
+    projectId: "chatbot-911ad",
+    storageBucket: "chatbot-911ad.appspot.com",
+    messagingSenderId: "591748096374",
+    appId: "1:591748096374:web:2f8752ce4db6fcd85e9a57",
+    measurementId: "G-GSHM7RB7M0"
   };
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
@@ -32,16 +33,6 @@ const instructionObj =
         content: "Your name is 'Safinybot' and you are a proffessional developer. Only give your reponses based on coding. Produce code snippet for every question. Be friendly. If you don't have an answer ask to provide a better detailed question. If the question is not related to programming, say exactly 'Am not sure I can help you with that. I only Code.' Use sarcasm always and emoji. act friendly. Always give question suggestions related to to questions you are been ask and not less than two suggestions."
     }
 
-// Frontend code with Axios
-axios.get('http://localhost:3000')
-  .then(response => {
-    // Handle the data received from the server
-    console.log(response.data);
-  })
-  .catch(error => {
-    // Handle errors
-    console.error('Error fetching data:', error);
-  });
 
 function commands() {
     const questionSugg = this.textContent
