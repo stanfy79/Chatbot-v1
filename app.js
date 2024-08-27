@@ -1,156 +1,54 @@
-import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore';
-import axios from 'axios';
-import { getDatabase, ref, push, get, remove } from 'firebase/database'
-import { Configuration, OpenAIApi } from 'openai'
-import { process } from './env';
+import axios from "axios";
+
+const chatbotConversation = document.getElementById('chatbot-conversation');
+const submitbtn = document.getElementById("submit-info");
 
 
-
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-})
-const openai = new OpenAIApi(configuration)
-const appSettings = {
-    apiKey: "AIzaSyDUvqx88wgcMDT7RWktjlYZ62IgA-z0YTk",
-    authDomain: "chatbot-911ad.firebaseapp.com",
-    databaseURL: "https://chatbot-911ad-default-rtdb.firebaseio.com",
-    projectId: "chatbot-911ad",
-    storageBucket: "chatbot-911ad.appspot.com",
-    messagingSenderId: "591748096374",
-    appId: "1:591748096374:web:2f8752ce4db6fcd85e9a57",
-    measurementId: "G-GSHM7RB7M0"
-  };
-const app = initializeApp(appSettings)
-const database = getDatabase(app)
-const conversationInDb = ref(database)
-const chatbotConversation = document.getElementById('chatbot-conversation')
-
-const instructionObj = 
-/*Update the content property's value to change the chatbot's personality. */
-    {
-        role: 'system',
-        content: "Your name is 'Safinybot' and you are a proffessional developer. Only give your reponses based on coding. Produce code snippet for every question. Be friendly. If you don't have an answer ask to provide a better detailed question. If the question is not related to programming, say exactly 'Am not sure I can help you with that. I only Code.' Use sarcasm always and emoji. act friendly. Always give question suggestions related to to questions you are been ask and not less than two suggestions."
-    }
-
-
-function commands() {
-    const questionSugg = this.textContent
-    const newSpeechBubble = document.createElement('div')
-
-    push(conversationInDb, {
-        role: 'user',
-        content: questionSugg
-    })
-    fetchReply()
-    newSpeechBubble.classList.add('speech', 'speech-human')
-    chatbotConversation.appendChild(newSpeechBubble)
-    newSpeechBubble.textContent = questionSugg
-    chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-    console.log(newSpeechBubble)
+submitbtn.addEventListener("click", () => {
+    document.querySelector(".profile-info-container").style.display = "none";
+});
+    
+    
+    const userInputs = "How to learn solana";
+    
+    
+const messages = [
+    { role: "system", content: "You are a helpful teacher that generate contents like courses, leasons, and articles to help users learn. use the personal information the user provide to generate personalized contents" },
+    { role: "user", content: userInputs }
+];
+try {
+    // Sending a POST request to the backend using Axios
+    const response = await axios.post('http://localhost:3000/api/chat', {
+        messages: messages
+    });
+    
+    const data = response.data;
+    console.log(data);
+    
+} catch (error) {
+    console.error('Error:', error);
 }
 
-var chatbotQuestion = document.querySelectorAll('.chatbot-quest-list');
-for (var i = 0, len = chatbotQuestion.length; i < len; i++) {
-    chatbotQuestion[i].onclick = commands;
-}
- 
-document.addEventListener('submit', (e) => {
-    e.preventDefault()
-    const userInput = document.getElementById('user-input')
-    push(conversationInDb, {
-        role: 'user',
-        content: userInput.value
-    })
-    fetchReply()
-    const newSpeechBubble = document.createElement('div')
-    newSpeechBubble.classList.add('speech', 'speech-human')
-    chatbotConversation.appendChild(newSpeechBubble)
-    newSpeechBubble.textContent = userInput.value
-    userInput.value = ''
-    chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-})
+const newSpeechBubble = document.createElement('div')
+const newSpeechBubbleText = document.createElement('div')
+newSpeechBubble.classList.add('leasons-ai-container')
+newSpeechBubbleText.classList.add('leasons-ai-text')
+chatbotConversation.appendChild(newSpeechBubble)
+chatbotConversation.appendChild(newSpeechBubbleText)
+newSpeechBubbleText.textContent = "MVP"
 
-async function fetchReply() {
-    get(conversationInDb).then(async (snapshot) => {
-        if (snapshot.exists()) {
-            const conversationArr = Object.values(snapshot.val())
-            conversationArr.unshift(instructionObj)
-            const response = await openai.createChatCompletion({
-                model: 'gpt-3.5-turbo',
-                messages: conversationArr,
-                presence_penalty: 1,
-                frequency_penalty: 0.6
-            })
-
-             push(conversationInDb, (response.data.choices[0].message))
-             renderTypewriterText(response.data.choices[0].message.content)
-        }
-        else {
-            console.log('No data available')
-        }
-
-    })
-}
+chatbotConversation.scrollTop = chatbotConversation.scrollHeight
 
 
-function renderTypewriterText(text) {
-    const newSpeechBubble = document.createElement('div')
-    newSpeechBubble.classList.add('speech', 'speech-ai', 'ai-typing')
-    chatbotConversation.appendChild(newSpeechBubble)
-    let i = 0
-    const interval = setInterval(() => {
-        
-        if (text.length === i) {
-            clearInterval(interval)
-            newSpeechBubble.classList.remove('ai-typing')
-            newSpeechBubble.textContent += text
-        }
-        i++
-        chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-    }, 10)
-}
-
-document.getElementById('clear-btn').addEventListener("click",() => {
-    remove(conversationInDb)
-    chatbotConversation.innerHTML = '<div class="menu-container"> <div class="menu-content-list-container"> <div class="chatbot-quest-list" data-command="">Hi, Safiny</div> <div class="chatbot-quest-list" data-command="">Fix my code!</div> <div class="chatbot-quest-list" data-command="">Help me create a website.</div> <div class="chatbot-quest-list" data-command="">How can I become a proffessionanl developer?</div> </div> </div> <div class="speech speech-ai">How can I help you?</div>'
-})
-
- function renderConversationFromDb(){
-     get(conversationInDb).then(async (snapshot)=>{
-         if(snapshot.exists()) {
-             Object.values(snapshot.val()).forEach(dbObj => {
-                 const newSpeechBubble = document.createElement('div')
-                 newSpeechBubble.classList.add(
-                     'speech',
-                     `speech-${dbObj.role === 'user' ? 'human' : 'ai'}`
-                     )
-                 chatbotConversation.appendChild(newSpeechBubble)
-                 newSpeechBubble.textContent = dbObj.content
-             })
-             chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-         }
-     })
- }
- renderConversationFromDb()
-
+// Function to render current time
 function renderCurrentTime() {
     const renderTime = document.querySelector(".supportTime");
-    setInterval( () => {
-        const date = new Date()
-        const hour = date.getHours()
-        const minute = date.getMinutes()
-        const second = date.getSeconds()
-
-        renderTime.textContent = hour + ' : ' + minute + ' : ' + second
-    },100)
+    setInterval(() => {
+        const date = new Date();
+        const hour = date.getHours().toString().padStart(2, '0');
+        const minute = date.getMinutes().toString().padStart(2, '0');
+        const second = date.getSeconds().toString().padStart(2, '0');
+        renderTime.textContent = `${hour} : ${minute} : ${second}`;
+    }, 1000); // Update every second
 }
-renderCurrentTime()
-
-// document.querySelector('.close-menu-container').addEventListener("click", () => {
-//     document.querySelector('.menu-container').classList.add('closing-menu')
-// })
-
-// document.querySelector('.chatbot-class-menu-btn').addEventListener("click", () => {
-//     document.querySelector('.menu-container').classList.remove('closing-menu')
-// })
+renderCurrentTime();
